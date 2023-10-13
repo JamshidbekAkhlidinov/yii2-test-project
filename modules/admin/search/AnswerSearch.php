@@ -18,7 +18,7 @@ class AnswerSearch extends Answer
     {
         return [
             [['id', 'subject_id', 'test_id', 'question_id', 'correct_answer', 'status', 'created_by'], 'integer'],
-            [['text', 'crated_at'], 'safe'],
+            [['text', 'created_at'], 'safe'],
         ];
     }
 
@@ -64,7 +64,7 @@ class AnswerSearch extends Answer
             'question_id' => $this->question_id,
             'correct_answer' => $this->correct_answer,
             'status' => $this->status,
-            'crated_at' => $this->crated_at,
+            'created_at' => $this->created_at,
             'created_by' => $this->created_by,
         ]);
 

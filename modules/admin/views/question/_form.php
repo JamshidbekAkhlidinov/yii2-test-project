@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\admin\repository\ModelsToArray;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,19 +13,36 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'subject_id')->textInput() ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'subject_id')->dropDownList(
+                ModelsToArray::getSubject(),
+                [
+                    'prompt' => Yii::t('app', '--Select Subject--'),
+                ]
+            ) ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($model, 'test_id')->dropDownList(
+                ModelsToArray::getSubject(),
+                [
+                    'prompt' => Yii::t('app', '--Select Test--'),
+                ]
+            ) ?>
+        </div>
+        <div class="col-md-6">
 
-    <?= $form->field($model, 'test_id')->textInput() ?>
+        </div>
+
+
+    </div>
+
 
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->checkbox() ?>
 
-    <?= $form->field($model, 'bal')->textInput() ?>
-
-    <?= $form->field($model, 'crated_at')->textInput() ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
+    <?= $form->field($model, 'bal')->input('number') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

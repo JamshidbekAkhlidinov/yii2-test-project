@@ -18,7 +18,7 @@ class QuestionSearch extends Question
     {
         return [
             [['id', 'subject_id', 'test_id', 'status', 'created_by'], 'integer'],
-            [['text', 'crated_at'], 'safe'],
+            [['text', 'created_at'], 'safe'],
             [['bal'], 'number'],
         ];
     }
@@ -64,7 +64,7 @@ class QuestionSearch extends Question
             'test_id' => $this->test_id,
             'status' => $this->status,
             'bal' => $this->bal,
-            'crated_at' => $this->crated_at,
+            'created_at' => $this->created_at,
             'created_by' => $this->created_by,
         ]);
 

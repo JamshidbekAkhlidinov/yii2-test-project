@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "test".
@@ -11,7 +13,7 @@ use Yii;
  * @property int|null $subject_id
  * @property string|null $title
  * @property string|null $description
- * @property string|null $crated_at
+ * @property string|null $created_at
  * @property int|null $created_by
  *
  * @property Answer[] $answers
@@ -29,6 +31,22 @@ class Test extends \yii\db\ActiveRecord
         return 'test';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'updatedAtAttribute' => false,
+                'value' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'class' => BlameableBehavior::class,
+                'updatedByAttribute' => false,
+                'defaultValue' => 1
+            ]
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -37,7 +55,7 @@ class Test extends \yii\db\ActiveRecord
         return [
             [['subject_id', 'created_by'], 'integer'],
             [['description'], 'string'],
-            [['crated_at'], 'safe'],
+            [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['subject_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subject::class, 'targetAttribute' => ['subject_id' => 'id']],
@@ -54,7 +72,7 @@ class Test extends \yii\db\ActiveRecord
             'subject_id' => Yii::t('app', 'Subject ID'),
             'title' => Yii::t('app', 'Title'),
             'description' => Yii::t('app', 'Description'),
-            'crated_at' => Yii::t('app', 'Crated At'),
+            'created_at' => Yii::t('app', 'Created At'),
             'created_by' => Yii::t('app', 'Created By'),
         ];
     }

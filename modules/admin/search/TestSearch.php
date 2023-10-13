@@ -18,7 +18,7 @@ class TestSearch extends Test
     {
         return [
             [['id', 'subject_id', 'created_by'], 'integer'],
-            [['title', 'description', 'crated_at'], 'safe'],
+            [['title', 'description', 'created_at'], 'safe'],
         ];
     }
 
@@ -60,7 +60,7 @@ class TestSearch extends Test
         $query->andFilterWhere([
             'id' => $this->id,
             'subject_id' => $this->subject_id,
-            'crated_at' => $this->crated_at,
+            'created_at' => $this->created_at,
             'created_by' => $this->created_by,
         ]);
 

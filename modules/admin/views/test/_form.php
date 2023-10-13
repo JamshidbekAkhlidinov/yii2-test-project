@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\admin\repository\ModelsToArray;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,15 +13,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'subject_id')->textInput() ?>
+    <?= $form->field($model, 'subject_id')->dropDownList(
+        ModelsToArray::getSubject(),
+        [
+            'prompt' => Yii::t('app', '--Select Subject--'),
+        ]
+    ) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'crated_at')->textInput() ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

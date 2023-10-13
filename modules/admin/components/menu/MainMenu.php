@@ -26,21 +26,39 @@ class MainMenu
                     ]
                 ],
                 [
-                    'label' => translate("Users"),
+                    'label' => translate("Fanlar"),
                     'iconType' => 'fa',
                     'icon' => 'users',
-                    'url' => ['user/index'],
+                    'url' => ['subject/index'],
                     'options' => [
-                        'class' => $controller_id == 'user' ? 'active' : ''
+                        'class' => $controller_id == 'subject' ? 'active' : ''
                     ]
                 ],
                 [
-                    'label' => translate("Specialists"),
+                    'label' => translate("Teslar"),
                     'iconType' => 'fa',
                     'icon' => 'th-large ',
-                    'url' => ['/specialist'],
+                    'url' => ['test/index'],
                     'options' => [
-                        'class' => $controller_id == 'specialist' ? 'active' : ''
+                        'class' => $controller_id == 'test' ? 'active' : ''
+                    ]
+                ],
+                [
+                    'label' => translate("Savollar"),
+                    'iconType' => 'fa',
+                    'icon' => 'th-large ',
+                    'url' => ['question/index'],
+                    'options' => [
+                        'class' => $controller_id == 'question' ? 'active' : ''
+                    ]
+                ],
+                [
+                    'label' => translate("Javoblar"),
+                    'iconType' => 'fa',
+                    'icon' => 'th-large ',
+                    'url' => ['answer/index'],
+                    'options' => [
+                        'class' => $controller_id == 'answer' ? 'active' : ''
                     ]
                 ],
             ],

@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "answer".
@@ -14,7 +16,7 @@ use Yii;
  * @property string|null $text
  * @property int|null $correct_answer
  * @property int|null $status
- * @property string|null $crated_at
+ * @property string|null $created_at
  * @property int|null $created_by
  *
  * @property User $createdBy
@@ -40,7 +42,7 @@ class Answer extends \yii\db\ActiveRecord
         return [
             [['subject_id', 'test_id', 'question_id', 'correct_answer', 'status', 'created_by'], 'integer'],
             [['text'], 'string'],
-            [['crated_at'], 'safe'],
+            [['created_at'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['question_id'], 'exist', 'skipOnError' => true, 'targetClass' => Question::class, 'targetAttribute' => ['question_id' => 'id']],
             [['subject_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subject::class, 'targetAttribute' => ['subject_id' => 'id']],
@@ -48,6 +50,21 @@ class Answer extends \yii\db\ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'updatedAtAttribute' => false,
+                'value' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'class' => BlameableBehavior::class,
+                'updatedByAttribute' => false,
+                'defaultValue' => 1
+            ]
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -61,7 +78,7 @@ class Answer extends \yii\db\ActiveRecord
             'text' => Yii::t('app', 'Text'),
             'correct_answer' => Yii::t('app', 'Correct Answer'),
             'status' => Yii::t('app', 'Status'),
-            'crated_at' => Yii::t('app', 'Crated At'),
+            'created_at' => Yii::t('app', 'Created At'),
             'created_by' => Yii::t('app', 'Created By'),
         ];
     }
