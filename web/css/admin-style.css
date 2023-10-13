@@ -1,0 +1,5 @@
+#answers_list > ::marker {
+    color: black;
+    font-weight: 700;
+    font-size: 30px;
+}
