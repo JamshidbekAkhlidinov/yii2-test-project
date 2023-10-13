@@ -7,6 +7,8 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'homeUrl' => '/',
+    'layout'=>'main',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
@@ -14,12 +16,14 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
+            'layout' => 'main',
         ],
     ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '122112',
+            'baseUrl' => '/',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -27,9 +31,10 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['admin/site/login']
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'admin/site/error',
         ],
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
@@ -50,6 +55,7 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'baseUrl' => '/',
             'rules' => [
             ],
         ],

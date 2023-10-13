@@ -1,4 +1,9 @@
 <?php
+/*
+ *   Jamshidbek Akhlidinov
+ *   13 - 10 2023 17:51:30
+ *   https://github.com/JamshidbekAkhlidinov
+ */
 
 namespace app\widgets;
 

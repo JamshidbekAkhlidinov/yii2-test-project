@@ -21,9 +21,16 @@ class Module extends \yii\base\Module
                 'class' => \yii\filters\AccessControl::class,
                 'rules' => [
                     [
+                        'controllers'=>['admin/site'],
+                        'actions' => ['login'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+
                 ],
             ],
         ];
