@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'answers')->widget(
                 MultipleInput::className(), [
                     'max' => 10,
-                    'min' => 2, // should be at least 2 rows
+                    'min' => 1, // should be at least 2 rows
                     'allowEmptyList' => false,
                     'enableGuessTitle' => true,
                     'addButtonPosition' => MultipleInput::POS_HEADER,
