@@ -2,6 +2,8 @@
 
 namespace app\models\query;
 
+use app\enums\StatusEnum;
+
 /**
  * This is the ActiveQuery class for [[\app\models\Question]].
  *
@@ -9,11 +11,10 @@ namespace app\models\query;
  */
 class QuestionQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+    public function active()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
+        return $this->andWhere(['[[status]]' => StatusEnum::ACTIVE]);
+    }
     /**
      * {@inheritdoc}
      * @return \app\models\Question[]|array
