@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Answer $model */
 
-$this->title = $model->id;
+$this->title =  strip_tags($model->text);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Answers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -30,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'subject_id',
-            'test_id',
-            'question_id',
-            'text:ntext',
+            'subject.name',
+            'test.title',
+            'question.text:raw',
+            'text:raw',
             'correct_answer',
             'status',
             'created_at',

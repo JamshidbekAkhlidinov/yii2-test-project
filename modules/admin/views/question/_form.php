@@ -70,7 +70,7 @@ use yii\widgets\ActiveForm;
                 ]
             ) ?>
             <?= $form->field($model, 'test_id')->dropDownList(
-                ModelsToArray::getSubject(),
+                ModelsToArray::getTest(),
                 [
                     'prompt' => Yii::t('app', '--Select Test--'),
                 ]

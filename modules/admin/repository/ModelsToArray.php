@@ -28,7 +28,7 @@ class ModelsToArray
         return ArrayHelper::map(
             Test::find()->all(),
             'id',
-            'name',
+            'title',
         );
     }
 
