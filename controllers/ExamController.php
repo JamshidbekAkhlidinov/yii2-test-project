@@ -38,7 +38,11 @@ class ExamController extends Controller
 
     public function actionQuestion($test_id)
     {
-        $query = Question::find()->andWhere(['test_id' => $test_id]);
+        $query = Question::find()
+            ->andWhere(['test_id' => $test_id])
+            ->orderBy('RAND()'); // Random tartibda olish uchun ORDER BY RAND()
+
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);

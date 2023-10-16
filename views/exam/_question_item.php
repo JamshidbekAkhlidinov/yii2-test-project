@@ -34,9 +34,11 @@ use app\enums\StatusEnum;
         if ($answerCount >= 2) {
             $inputType = 'checkbox';
         }
-
         ?>
-        <?php foreach ($model->answers as $answer): ?>
+        <?php
+        $answers = $model->getAnswers()->all();
+        shuffle($answers);
+        foreach ($answers as $answer): ?>
             <li class="list-group-item">
                 <label for="question[<?= $model->id ?>][<?= $answer->id ?>]" class=" d-flex">
                     <input
