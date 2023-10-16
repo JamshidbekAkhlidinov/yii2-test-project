@@ -22,7 +22,11 @@ use app\enums\StatusEnum;
     </div>
     <ul class="list-group list-group-flush">
         <?php
-        $answerCount = $model->getAnswers()->andWhere(['correct_answer' => StatusEnum::ACTIVE])->count();
+        $answerCount = $model->getAnswers()
+            ->andWhere([
+                'correct_answer' => StatusEnum::ACTIVE
+            ])
+            ->count();
         $inputType = 'radio';
         if ($answerCount == 0) {
             $inputType = 'text';
@@ -38,11 +42,11 @@ use app\enums\StatusEnum;
                     <input
                             class="<?= $answerCount == 0 ? "form-control" : "form-check-input" ?> me-1"
                             id="question[<?= $model->id ?>][<?= $answer->id ?>]"
-                            name="question[<?= $model->id ?>][<?= $answer->id ?>]"
+                            name="question[<?= $model->id ?>][]"
                             type="<?= $inputType ?>"
                             value="<?= $answerCount == 0 ? "" : $answer->id ?>"
                     >
-                    <?= $answer->text ?>
+                    <?= $answerCount == 0 ? "" : $answer->text ?>
                 </label>
             </li>
         <?php endforeach; ?>
