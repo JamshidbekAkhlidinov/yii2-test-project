@@ -61,6 +61,24 @@ class MainMenu
                         'class' => $controller_id == 'answer' ? 'active' : ''
                     ]
                 ],
+                [
+                    'label' => translate("Tanlangan testlar"),
+                    'iconType' => 'fa',
+                    'icon' => 'th-large ',
+                    'url' => ['selected-test/index'],
+                    'options' => [
+                        'class' => $controller_id == 'selected-test' ? 'active' : ''
+                    ]
+                ],
+                [
+                    'label' => translate("Testlar Tarixi"),
+                    'iconType' => 'fa',
+                    'icon' => 'th-large ',
+                    'url' => ['history-of-solution/index'],
+                    'options' => [
+                        'class' => $controller_id == 'history-of-solution' ? 'active' : ''
+                    ]
+                ],
             ],
         ]);
     }
