@@ -36,7 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'user.username',
             'date',
             'ball',
+            'all_ball',
             'correct_answers_count',
+            'count_question',
             [
                 'attribute' => 'answers',
                 'format' => 'raw',

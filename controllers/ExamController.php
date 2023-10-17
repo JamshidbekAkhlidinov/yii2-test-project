@@ -98,6 +98,8 @@ class ExamController extends Controller
                 [
                     'subject_id' => $subject_id,
                     'test_id' => $test_id,
+                    'all_ball' => $form->AllBall(),
+                    'count_question' => $form->CountQuestion(),
                     'selected_test_id' => $test_id,
                     'bal' => $form->bal,
                     'correct_answers_count' => $form->getCorrectCount(),

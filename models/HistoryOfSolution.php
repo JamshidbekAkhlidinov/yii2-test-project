@@ -16,6 +16,8 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $user_id
  * @property string|null $date
  * @property float|null $ball
+ * @property float|null $all_ball
+ * @property integer|null $count_question
  * @property int|null $correct_answers_count
  * @property string|null $answers
  *
@@ -59,7 +61,7 @@ class HistoryOfSolution extends \yii\db\ActiveRecord
         return [
             [['subject_id', 'test_id', 'selected_test_id', 'user_id', 'correct_answers_count'], 'integer'],
             [['date'], 'safe'],
-            [['ball'], 'number'],
+            [['ball','all_ball','count_question'], 'number'],
             [['answers'], 'safe'],
             [['selected_test_id'], 'exist', 'skipOnError' => true, 'targetClass' => SelectedTest::class, 'targetAttribute' => ['selected_test_id' => 'id']],
             [['subject_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subject::class, 'targetAttribute' => ['subject_id' => 'id']],

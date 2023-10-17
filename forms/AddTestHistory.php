@@ -18,6 +18,8 @@ class AddTestHistory extends Model
     public $bal;
     public $correct_answers_count;
     public $answers;
+    public $all_ball;
+    public $count_question;
 
 
     public function __construct(public HistoryOfSolution $model, $config = [])
@@ -30,6 +32,8 @@ class AddTestHistory extends Model
         $model = $this->model;
         $model->subject_id = $this->subject_id;
         $model->test_id = $this->test_id;
+        $model->all_ball = $this->all_ball;
+        $model->count_question = $this->count_question;
         $model->selected_test_id = $this->selected_test_id;
         $model->ball = $this->bal;
         $model->correct_answers_count = $this->correct_answers_count;

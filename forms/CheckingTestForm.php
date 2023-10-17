@@ -17,6 +17,9 @@ class CheckingTestForm extends Model
     public $count = 0;
     public $bal = 0;
 
+    public $all_count = 0;
+    public $all_bal = 0;
+
     public array $answers;
 
     public function __construct(
@@ -69,6 +72,8 @@ class CheckingTestForm extends Model
             }
 
             $questionModel = Question::findOne(['id' => $question_id]);
+            $this->all_bal += $questionModel->bal;
+            $this->all_count++;
 
             $bodyAnswers[$questionModel->id] = [
                 'question' => $questionModel->text,
@@ -209,5 +214,15 @@ class CheckingTestForm extends Model
     public function getAnswers()
     {
         return $this->answers;
+    }
+
+    public function AllBall()
+    {
+        return $this->all_bal;
+    }
+
+    public function CountQuestion()
+    {
+        return $this->all_count;
     }
 }
