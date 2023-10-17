@@ -42,6 +42,9 @@ class SelectedTestSearch extends SelectedTest
     {
         $query = SelectedTest::find();
 
+        $query->orderBy([
+            'id' => SORT_DESC,
+        ]);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

@@ -42,6 +42,10 @@ class TestSearch extends Test
     {
         $query = Test::find();
 
+        $query->orderBy([
+            'id' => SORT_DESC,
+        ]);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

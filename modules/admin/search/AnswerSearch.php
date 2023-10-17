@@ -42,6 +42,10 @@ class AnswerSearch extends Answer
     {
         $query = Answer::find();
 
+        $query->orderBy([
+            'id' => SORT_DESC,
+        ]);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
