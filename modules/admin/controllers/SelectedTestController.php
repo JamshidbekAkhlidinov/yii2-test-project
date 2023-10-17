@@ -3,7 +3,9 @@
 namespace app\modules\admin\controllers;
 
 use app\models\SelectedTest;
+use app\modules\admin\forms\SelectedTestForm;
 use app\modules\admin\search\SelectedTestSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -31,11 +33,6 @@ class SelectedTestController extends Controller
         );
     }
 
-    /**
-     * Lists all SelectedTest models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $searchModel = new SelectedTestSearch();
@@ -47,12 +44,6 @@ class SelectedTestController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single SelectedTest model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -60,55 +51,33 @@ class SelectedTestController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new SelectedTest model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate()
     {
         $model = new SelectedTest();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
+        return $this->form($model, 'create');
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
-    /**
-     * Updates an existing SelectedTest model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->form($model, 'update');
     }
 
-    /**
-     * Deletes an existing SelectedTest model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
+    public function form(SelectedTest $model, $view)
+    {
+        $form = new SelectedTestForm($model);
+        if ($form->load(request()->post()) && $form->save()) {
+            return $this->redirect(['view', 'id' => $form->model->id]);
+        }
+        return $this->render($view, [
+            'model' => $form,
+        ]);
+
+    }
+
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
