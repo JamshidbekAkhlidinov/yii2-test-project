@@ -22,6 +22,7 @@ class CheckingTestForm extends Model
     public function __construct(
         public $subject_id,
         public $test_id,
+        public $selected_test_id,
         public $questions,
                $config = []
     )
@@ -29,6 +30,77 @@ class CheckingTestForm extends Model
         parent::__construct($config);
     }
 
+    public function checkingTestType()
+    {
+        $selected_test_id = $this->selected_test_id;
+
+        if ($selected_test_id) {
+            $this->checkingSelectedTest();
+        } else {
+            $this->check();
+        }
+    }
+
+    public function checkingSelectedTest()
+    {
+        $question_ids = $this->questions;
+        $count = 0;
+        $bal = 0;
+        $bodyAnswers = [];
+        foreach ($question_ids as $question_id => $answer_ids) {
+            $answers = Answer::find()
+                ->andWhere(
+                    [
+                        'question_id' => $question_id,
+                        'correct_answer' => StatusEnum::ACTIVE,
+                    ]
+                )
+                ->asArray()
+                ->all();
+            $correct_answer_count = 0;
+
+            if (isset($answer_ids[0]) && empty($answer_ids[0])) {
+                unset($answer_ids[0]);
+            }
+            foreach ($answer_ids as $id) {
+                if (in_array($id, array_column($answers, 'id'))) {
+                    $correct_answer_count++;
+                }
+            }
+
+            $questionModel = Question::findOne(['id' => $question_id]);
+
+            $bodyAnswers[$questionModel->id] = [
+                'question' => $questionModel->text,
+                'answers' => $questionModel
+                    ->getAnswers()
+                    ->select(['id', 'text'])
+                    ->asArray()
+                    ->all(),
+                'correct_answer' => $answer_ids,
+            ];
+
+            if (count($answers) == $correct_answer_count && $correct_answer_count != 0) {
+                $bal += $questionModel->bal;
+                $count++;
+            }
+            if ($correct_answer_count == 0) {
+                $answer = Answer::findOne([
+                    'question_id' => $question_id,
+                ])->text;
+                $answerText = strtolower(strip_tags($answer));
+                $replyText = isset($answer_ids[1]) ? strtolower($answer_ids[1]) : "";
+                if ($answerText == $replyText) {
+                    $bal += $questionModel->bal;
+                    $count++;
+                }
+            }
+        }
+        $this->setCorrectCount($count);
+        $this->setBal($bal);
+        $this->setAnswers($bodyAnswers);
+        return true;
+    }
 
     public function check()
     {
@@ -100,6 +172,9 @@ class CheckingTestForm extends Model
 
     public function getTestCount()
     {
+        if ($this->selected_test_id) {
+            return count($this->questions);
+        }
         return Question::find()->andWhere([
             'subject_id' => $this->subject_id,
             'test_id' => $this->test_id,

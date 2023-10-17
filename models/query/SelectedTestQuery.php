@@ -2,6 +2,8 @@
 
 namespace app\models\query;
 
+use app\enums\StatusEnum;
+
 /**
  * This is the ActiveQuery class for [[\app\models\SelectedTest]].
  *
@@ -9,11 +11,10 @@ namespace app\models\query;
  */
 class SelectedTestQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
+//    public function active()
+//    {
+//        return $this->andWhere(['[[status]]' => StatusEnum::ACTIVE]);
+//    }
     /**
      * {@inheritdoc}
      * @return \app\models\SelectedTest[]|array
