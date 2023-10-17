@@ -3,8 +3,10 @@
 namespace app\controllers;
 
 use app\enums\StatusEnum;
+use app\forms\AddTestHistory;
 use app\forms\CheckingTestForm;
 use app\models\Answer;
+use app\models\HistoryOfSolution;
 use app\models\Question;
 use app\models\Subject;
 use app\models\Test;
@@ -41,7 +43,7 @@ class ExamController extends Controller
     {
         $query = Question::find()
             ->andWhere(['test_id' => $test_id])
-            ->orderBy('RAND()'); // Random tartibda olish uchun ORDER BY RAND()
+            ->orderBy('RAND()');
 
 
         $dataProvider = new ActiveDataProvider([
@@ -55,16 +57,29 @@ class ExamController extends Controller
     public function actionCheck()
     {
         if (request()->post()) {
-            $subject_id = $post = request()->post('subject_id');
-            $test_id = $post = request()->post('test_id');
-            $question_ids = $post = request()->post('question', []);
+            $subject_id = request()->post('subject_id');
+            $test_id = request()->post('test_id');
+            $question_ids = request()->post('question', []);
 
             $form = new CheckingTestForm($subject_id, $test_id, $question_ids);
             $form->check();
 
+            $historyForm = new AddTestHistory(
+                new HistoryOfSolution(),
+                [
+                    'subject_id' => $subject_id,
+                    'test_id' => $test_id,
+                    'bal' => $form->bal,
+                    'correct_answers_count' => $form->getCorrectCount(),
+                    'answers' => $form->getAnswers(),
+                ]
+            );
+            $historyForm->save();
+
             return $this->render('answer', [
                 'questionCount' => $form->getTestCount(),
                 'checking_count' => $form->getCorrectCount(),
+                'bal' => $form->getBal(),
             ]);
         }
         \Yii::$app->response->format = Response::FORMAT_JSON;

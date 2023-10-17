@@ -60,7 +60,7 @@ class HistoryOfSolution extends \yii\db\ActiveRecord
             [['subject_id', 'test_id', 'selected_test_id', 'user_id', 'correct_answers_count'], 'integer'],
             [['date'], 'safe'],
             [['ball'], 'number'],
-            [['answers'], 'string'],
+            [['answers'], 'safe'],
             [['selected_test_id'], 'exist', 'skipOnError' => true, 'targetClass' => SelectedTest::class, 'targetAttribute' => ['selected_test_id' => 'id']],
             [['subject_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subject::class, 'targetAttribute' => ['subject_id' => 'id']],
             [['test_id'], 'exist', 'skipOnError' => true, 'targetClass' => Test::class, 'targetAttribute' => ['test_id' => 'id']],

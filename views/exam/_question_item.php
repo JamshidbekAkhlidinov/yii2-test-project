@@ -19,6 +19,7 @@ use app\enums\StatusEnum;
         <p class="card-text">
             <?= $model->text ?>
         </p>
+        <input type="hidden" name="question[<?= $model->id ?>][]">
     </div>
     <ul class="list-group list-group-flush">
         <?php
