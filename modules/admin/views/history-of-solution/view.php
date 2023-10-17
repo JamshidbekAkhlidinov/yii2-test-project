@@ -37,7 +37,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'date',
             'ball',
             'correct_answers_count',
-            'answers:ntext',
+            [
+                'attribute' => 'answers',
+                'format' => 'raw',
+                'value' => static function (\app\models\HistoryOfSolution $solution) {
+                    return Html::tag(
+                        'pre',
+                        $solution->answers,
+                    );
+                }
+            ],
         ],
     ]) ?>
 
