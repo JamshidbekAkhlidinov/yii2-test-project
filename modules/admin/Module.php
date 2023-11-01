@@ -2,6 +2,7 @@
 
 namespace app\modules\admin;
 
+use app\enums\UserRoleEnum;
 use yii\filters\AccessControl;
 
 /**
@@ -21,16 +22,21 @@ class Module extends \yii\base\Module
                 'class' => \yii\filters\AccessControl::class,
                 'rules' => [
                     [
-                        'controllers'=>['admin/site'],
-                        'actions' => ['login'],
+                        'controllers' => ['admin/site'],
+                        'actions' => ['login','signup'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
+                        'controllers' => ['admin/site'],
+                        'actions' => ['error','logout'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['?','@'],
                     ],
-
+                    [
+                        'allow' => true,
+                        'roles' => [UserRoleEnum::ADMINISTRATOR,UserRoleEnum::MANAGER],
+                    ],
                 ],
             ],
         ];
@@ -42,6 +48,10 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
+
+        $this->modules = [
+            'rbac' => \app\modules\admin\modules\rbac\Module::class
+        ];
 
         // custom initialization code goes here
     }

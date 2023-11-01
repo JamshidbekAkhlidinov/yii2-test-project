@@ -7,6 +7,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\enums\UserRoleEnum;
 use app\modules\admin\forms\LoginForm;
 use app\modules\admin\forms\SignupForm;
 use Yii;
@@ -38,6 +39,9 @@ class SiteController extends DefaultController
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            if (!user()->can(UserRoleEnum::USER)) {
+                return $this->redirect('/admin/dashboard');
+            }
             return $this->goBack();
         }
 
@@ -68,7 +72,8 @@ class SiteController extends DefaultController
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+            Yii::$app->user->login($model->user, 3600 * 24 * 30);
+            //Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
             return $this->goHome();
         }
         return $this->render('signup', [

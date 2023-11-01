@@ -286,10 +286,10 @@ $user = user()->identity;
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <?= Html::a("Profile", url::to(['dashboard/profile']), ['class' => 'btn btn-default btn-flat']) ?>
+                                    <?= Html::a("Profile", url::to(['/admin/dashboard/profile']), ['class' => 'btn btn-default btn-flat']) ?>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="<?= url::to(['dashboard/logout']) ?>"
+                                    <a href="<?= url::to(['/admin/dashboard/logout']) ?>"
                                        class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>

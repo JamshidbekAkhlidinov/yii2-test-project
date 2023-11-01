@@ -7,6 +7,7 @@
 
 namespace app\modules\admin\components\menu;
 
+use app\enums\UserRoleEnum;
 use app\widgets\MenuWidget;
 
 class MainMenu
@@ -29,7 +30,7 @@ class MainMenu
                     'label' => translate("Fanlar"),
                     'iconType' => 'fa',
                     'icon' => 'users',
-                    'url' => ['subject/index'],
+                    'url' => ['/admin/subject/index'],
                     'options' => [
                         'class' => $controller_id == 'subject' ? 'active' : ''
                     ]
@@ -38,7 +39,7 @@ class MainMenu
                     'label' => translate("Teslar"),
                     'iconType' => 'fa',
                     'icon' => 'th-large ',
-                    'url' => ['test/index'],
+                    'url' => ['/admin/test/index'],
                     'options' => [
                         'class' => $controller_id == 'test' ? 'active' : ''
                     ]
@@ -47,7 +48,7 @@ class MainMenu
                     'label' => translate("Savollar"),
                     'iconType' => 'fa',
                     'icon' => 'th-large ',
-                    'url' => ['question/index'],
+                    'url' => ['/admin/question/index'],
                     'options' => [
                         'class' => $controller_id == 'question' ? 'active' : ''
                     ]
@@ -56,7 +57,7 @@ class MainMenu
                     'label' => translate("Javoblar"),
                     'iconType' => 'fa',
                     'icon' => 'th-large ',
-                    'url' => ['answer/index'],
+                    'url' => ['/admin/answer/index'],
                     'options' => [
                         'class' => $controller_id == 'answer' ? 'active' : ''
                     ]
@@ -65,7 +66,7 @@ class MainMenu
                     'label' => translate("Tanlangan testlar"),
                     'iconType' => 'fa',
                     'icon' => 'th-large ',
-                    'url' => ['selected-test/index'],
+                    'url' => ['/admin/selected-test/index'],
                     'options' => [
                         'class' => $controller_id == 'selected-test' ? 'active' : ''
                     ]
@@ -74,9 +75,48 @@ class MainMenu
                     'label' => translate("Testlar Tarixi"),
                     'iconType' => 'fa',
                     'icon' => 'th-large ',
-                    'url' => ['history-of-solution/index'],
+                    'url' => ['/admin/history-of-solution/index'],
                     'options' => [
                         'class' => $controller_id == 'history-of-solution' ? 'active' : ''
+                    ]
+                ],
+                [
+                    'label' => translate("Rbac configuration"),
+                    'iconType' => 'far',
+                    'icon' => 'user',
+                    'url' => ['#'],
+                    'visible' => user()->can(UserRoleEnum::ADMINISTRATOR),
+                    'options' => [
+                        'class' => $module_id == 'rbac' ? 'active' : '',
+                    ],
+                    'items' => [
+//                        [
+//                            'label' => translate("Rules"),
+//                            'iconType' => 'far',
+//                            'icon' => 'file-code',
+//                            'url' => ['/admin/rbac/auth-rule'],
+//                            'options' => [
+//                                'class' => $controller_id == 'auth-rule' ? 'active' : ''
+//                            ]
+//                        ],
+                        [
+                            'label' => translate("Items"),
+                            'iconType' => 'far',
+                            'icon' => 'file-code',
+                            'url' => ['/admin/rbac/auth-item'],
+                            'options' => [
+                                'class' => $controller_id == 'auth-item' ? 'active' : ''
+                            ]
+                        ],
+                        [
+                            'label' => translate("Assignment"),
+                            'iconType' => 'far',
+                            'icon' => 'file-code',
+                            'url' => ['/admin/rbac/auth-assignment'],
+                            'options' => [
+                                'class' => $controller_id == 'auth-assignment' ? 'active' : ''
+                            ]
+                        ],
                     ]
                 ],
             ],

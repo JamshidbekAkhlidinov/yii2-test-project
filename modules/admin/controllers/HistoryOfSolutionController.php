@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\models\HistoryOfSolution;
 use app\modules\admin\search\HistoryOfSolutionSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
