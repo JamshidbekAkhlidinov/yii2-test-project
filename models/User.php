@@ -17,6 +17,7 @@ use yii\web\IdentityInterface;
  * @property string $password_reset_token
  * @property string $verification_token
  * @property string $email
+ * @property string $access_token
  * @property string $auth_key
  * @property integer $status
  * @property integer $created_at
@@ -61,7 +62,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_INACTIVE],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
     }
@@ -79,7 +80,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return self::findOne(['auth_key' => $token]);
+        return self::findOne(['access_token' => $token]);
     }
 
     /**
@@ -193,6 +194,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function generateAuthKey()
     {
         $this->auth_key = security()->generateRandomString();
+    }
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAccessToken()
+    {
+        $this->access_token = security()->generateRandomString();
     }
 
     /**

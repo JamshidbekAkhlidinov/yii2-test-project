@@ -15,6 +15,7 @@ class SignupForm extends Model
     public $email;
     public $password;
 
+    public ?User $user;
 
     /**
      * {@inheritdoc}
@@ -48,15 +49,20 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
+        $user->generateAccessToken();
         $user->generateEmailVerificationToken();
 
-        return $user->save(); //&& $this->sendEmail($user);
+        $isSave = $user->save(); //&& $this->sendEmail($user);
+
+        $this->user = $user;
+
+        return $isSave;
     }
 
     /**
