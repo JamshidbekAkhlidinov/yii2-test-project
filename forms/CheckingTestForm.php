@@ -139,6 +139,8 @@ class CheckingTestForm extends Model
             }
 
             $questionModel = Question::findOne(['id' => $question_id]);
+            $this->all_bal += $questionModel->bal;
+            $this->all_count++;
 
             $bodyAnswers[$questionModel->id] = [
                 'question' => $questionModel->text,

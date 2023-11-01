@@ -34,7 +34,9 @@ class AddTestHistory extends Model
         $model->test_id = $this->test_id;
         $model->all_ball = $this->all_ball;
         $model->count_question = $this->count_question;
-        $model->selected_test_id = $this->selected_test_id;
+        if ($this->selected_test_id != null) {
+            $model->selected_test_id = $this->selected_test_id;
+        }
         $model->ball = $this->bal;
         $model->correct_answers_count = $this->correct_answers_count;
         $model->answers = json_encode($this->answers, JSON_PRETTY_PRINT);
