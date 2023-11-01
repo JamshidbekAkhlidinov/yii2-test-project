@@ -18,6 +18,7 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'layout' => 'main',
+            'defaultRoute' => 'dashboard',
         ],
     ],
     'components' => [
@@ -51,6 +52,9 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
         'db' => $db,
         'urlManager' => [
