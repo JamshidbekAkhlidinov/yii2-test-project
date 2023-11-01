@@ -1,6 +1,6 @@
 <?php
 
-use app\enums\UserEnum;
+use app\enums\UserRoleEnum;
 use app\models\User;
 use yii\db\Migration;
 
@@ -15,7 +15,7 @@ class m231013_114713_add_filler extends Migration
      */
     public function safeUp()
     {
-        foreach (UserEnum::LIST as $key => $value) {
+        foreach (UserRoleEnum::LIST as $key => $value) {
             $this->insert('{{%user}}', [
                 'username' => $key,
                 'auth_key' => security()->generateRandomString(),
@@ -36,7 +36,7 @@ class m231013_114713_add_filler extends Migration
      */
     public function safeDown()
     {
-        $this->delete('{{%user}}', ['username' => UserEnum::LIST]);
+        $this->delete('{{%user}}', ['username' => UserRoleEnum::LIST]);
     }
 
 }

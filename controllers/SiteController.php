@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\enums\UserRoleEnum;
 use app\modules\admin\forms\SignupForm;
 use Yii;
 use yii\filters\AccessControl;
@@ -78,6 +79,9 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            if (!user()->can(UserRoleEnum::USER)) {
+                return $this->redirect('/admin/dashboard');
+            }
             return $this->goBack();
         }
 
