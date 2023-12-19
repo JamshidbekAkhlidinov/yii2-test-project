@@ -43,6 +43,10 @@ class QuestionSearch extends Question
     {
         $query = Question::find();
 
+        if ($this->test_id) {
+            $query->andWhere(['test_id' => $this->test_id]);
+        }
+
         $query->orderBy([
             'id' => SORT_DESC,
         ]);

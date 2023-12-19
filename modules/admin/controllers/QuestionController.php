@@ -33,9 +33,9 @@ class QuestionController extends Controller
     }
 
 
-    public function actionIndex()
+    public function actionIndex($test_id)
     {
-        $searchModel = new QuestionSearch();
+        $searchModel = new QuestionSearch(['test_id' => $test_id]);
         $dataProvider = $searchModel->search(request()->queryParams);
 
         return $this->render('index', [
