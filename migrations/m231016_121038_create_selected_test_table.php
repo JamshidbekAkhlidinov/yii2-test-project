@@ -37,7 +37,9 @@ class m231016_121038_create_selected_test_table extends Migration
             '{{%selected_test}}',
             'created_by',
             '{{%user}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
     }
 

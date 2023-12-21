@@ -38,7 +38,9 @@ class m231013_120235_create_test_table extends Migration
             '{{%test}}',
             'subject_id',
             '{{%subject}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         // creates index for column `created_by`

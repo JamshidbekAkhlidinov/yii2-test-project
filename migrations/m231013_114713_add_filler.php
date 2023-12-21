@@ -15,8 +15,10 @@ class m231013_114713_add_filler extends Migration
      */
     public function safeUp()
     {
+        $auth = Yii::$app->authManager;
         foreach (UserRoleEnum::LIST as $key => $value) {
-            $this->insert('{{%user}}', [
+
+            $user = new User([
                 'username' => $key,
                 'auth_key' => security()->generateRandomString(),
                 'access_token' => security()->generateRandomString(),
@@ -28,6 +30,15 @@ class m231013_114713_add_filler extends Migration
                 'status' => User::STATUS_ACTIVE,
                 'verification_token' => security()->generateRandomString(),
             ]);
+            if ($user->save()) {
+                try {
+                    $role = $auth->createRole($key);
+                    $auth->add($role);
+                    $auth->assign($role, $user->id);
+                }catch (Exception $e) {
+                    print_r($e->getMessage());
+                }
+            }
         }
     }
 

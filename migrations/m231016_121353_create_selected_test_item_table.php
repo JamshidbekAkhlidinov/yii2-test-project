@@ -36,7 +36,9 @@ class m231016_121353_create_selected_test_item_table extends Migration
             '{{%selected_test_item}}',
             'selected_test_id',
             '{{%selected_test}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         // creates index for column `subject_id`
@@ -52,7 +54,9 @@ class m231016_121353_create_selected_test_item_table extends Migration
             '{{%selected_test_item}}',
             'subject_id',
             '{{%subject}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
     }
 

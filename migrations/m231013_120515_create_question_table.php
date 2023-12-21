@@ -41,7 +41,9 @@ class m231013_120515_create_question_table extends Migration
             '{{%question}}',
             'subject_id',
             '{{%subject}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         // creates index for column `test_id`

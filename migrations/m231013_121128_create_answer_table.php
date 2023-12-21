@@ -43,7 +43,9 @@ class m231013_121128_create_answer_table extends Migration
             '{{%answer}}',
             'subject_id',
             '{{%subject}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         // creates index for column `test_id`
@@ -59,7 +61,9 @@ class m231013_121128_create_answer_table extends Migration
             '{{%answer}}',
             'test_id',
             '{{%test}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         // creates index for column `question_id`
@@ -75,7 +79,9 @@ class m231013_121128_create_answer_table extends Migration
             '{{%answer}}',
             'question_id',
             '{{%question}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         // creates index for column `created_by`
@@ -91,7 +97,9 @@ class m231013_121128_create_answer_table extends Migration
             '{{%answer}}',
             'created_by',
             '{{%user}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
     }
 

@@ -43,7 +43,9 @@ class m231016_122516_create_history_of_solution_table extends Migration
             '{{%history_of_solution}}',
             'subject_id',
             '{{%subject}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         // creates index for column `test_id`
@@ -59,7 +61,9 @@ class m231016_122516_create_history_of_solution_table extends Migration
             '{{%history_of_solution}}',
             'test_id',
             '{{%test}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         // creates index for column `selected_test_id`
@@ -75,7 +79,9 @@ class m231016_122516_create_history_of_solution_table extends Migration
             '{{%history_of_solution}}',
             'selected_test_id',
             '{{%selected_test}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
 
         // creates index for column `user_id`
@@ -91,7 +97,9 @@ class m231016_122516_create_history_of_solution_table extends Migration
             '{{%history_of_solution}}',
             'user_id',
             '{{%user}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
     }
 
