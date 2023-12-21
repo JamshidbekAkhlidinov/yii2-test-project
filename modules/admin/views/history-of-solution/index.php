@@ -15,11 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="history-of-solution-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Create History Of Solution'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 

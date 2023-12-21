@@ -17,13 +17,14 @@ $this->title = 'My Yii Application';
             Login qiling yoki ro'yxatdan o'ting, Testlarni boshlang va o'z bilim darajadgiz haqida bilib oling.
         </p>
 
-        <?= Html::a("Kirish", ['site/login'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a("Ro'yxatdan o'tish", ['site/signup'], ['class' => 'btn btn-success']) ?>
         <?php if (!user()->isGuest): ?>
             <div class="pt-3">
                 <?= Html::a("Fanlardan testlar", ['exam/subject'], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a("Tanlanma testlar", ['exam/selected-test'], ['class' => 'btn btn-primary']) ?>
             </div>
+        <?php else: ?>
+            <?= Html::a("Kirish", ['site/login'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a("Ro'yxatdan o'tish", ['site/signup'], ['class' => 'btn btn-success']) ?>
         <?php endif; ?>
     </div>
 

@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /** @var yii\web\View $this */
 /** @var app\modules\admin\search\QuestionSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
@@ -15,11 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="question-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <?php if(get('test_id')): ?>
     <p>
-        <?= Html::a(Yii::t('app', 'Create Question'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(
+            Yii::t('app', 'Create Question'),
+            ['create', 'test_id' => get('test_id')],
+            ['class' => 'btn btn-success']
+        ) ?>
     </p>
+    <?php endif; ?>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -42,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Question $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

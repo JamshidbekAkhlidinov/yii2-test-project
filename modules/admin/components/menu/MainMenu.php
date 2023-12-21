@@ -54,15 +54,6 @@ class MainMenu
                     ]
                 ],
                 [
-                    'label' => translate("Javoblar"),
-                    'iconType' => 'fa',
-                    'icon' => 'th-large ',
-                    'url' => ['/admin/answer/index'],
-                    'options' => [
-                        'class' => $controller_id == 'answer' ? 'active' : ''
-                    ]
-                ],
-                [
                     'label' => translate("Tanlangan testlar"),
                     'iconType' => 'fa',
                     'icon' => 'th-large ',

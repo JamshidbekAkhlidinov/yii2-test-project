@@ -1,6 +1,7 @@
 <?php
 
 use alexantr\tinymce\TinyMCE;
+use app\models\Test;
 use app\modules\admin\repository\ModelsToArray;
 use unclead\multipleinput\MultipleInput;
 use yii\helpers\Html;
@@ -22,7 +23,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'text')->widget(TinyMCE::className(), [
                 'presetPath' => '@app/config/tinymce.php',
                 'clientOptions' => [
-                    'height' => 500,
+                    'height' => 400,
                 ],
             ]) ?>
 
@@ -63,21 +64,35 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="col-md-3">
-            <?= $form->field($model, 'subject_id')->dropDownList(
-                ModelsToArray::getSubject(),
-                [
-                    'prompt' => Yii::t('app', '--Select Subject--'),
-                ]
-            ) ?>
-            <?= $form->field($model, 'test_id')->dropDownList(
-                ModelsToArray::getTest(),
-                [
-                    'prompt' => Yii::t('app', '--Select Test--'),
-                ]
-            ) ?>
-            <?= $form->field($model, 'status')->checkbox() ?>
+            <?php if ($test_id = get('test_id') || $test_id = $model->test_id): ?>
+                <?php if ($test = Test::findOne(['id' => $test_id])): ?>
+                    <?= $form->field($model, 'subject_id')
+                        ->hiddenInput(['value' => $test->subject_id])
+                        ->label(false) ?>
+                    <?= $form->field($model, 'test_id')
+                        ->hiddenInput(['value' => $test->id])
+                        ->label(false) ?>
+                <?php endif; ?>
+            <?php else: ?>
+                <?= $form->field($model, 'subject_id')->dropDownList(
+                    ModelsToArray::getSubject(),
+                    [
+                        'prompt' => Yii::t('app', '--Select Subject--'),
+                    ]
+                ) ?>
+                <?= $form->field($model, 'test_id')->dropDownList(
+                    ModelsToArray::getTest(),
+                    [
+                        'prompt' => Yii::t('app', '--Select Test--'),
+                    ]
+                ) ?>
+            <?php endif; ?>
 
             <?= $form->field($model, 'bal')->input('number') ?>
+
+
+            <?= $form->field($model, 'status')->checkbox() ?>
+
 
             <div class="form-group">
                 <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

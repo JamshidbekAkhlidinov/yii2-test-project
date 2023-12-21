@@ -10,21 +10,31 @@ use yii\widgets\DetailView;
 $this->title = strip_tags($model->text);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Questions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
 ?>
 <div class="question-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
+        <?= Html::a(Yii::t('app', 'Back'),
+            [
+                'question/index',
+                'test_id' => $model->test_id,
             ],
-        ]) ?>
+            ['class' => 'btn btn-info']) ?>
+        <?= Html::a(Yii::t('app', 'Update'),
+            [
+                'update',
+                'id' => $model->id,
+                'test_id' => $model->test_id,
+            ],
+            ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Delete'),
+            ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
+            ]) ?>
     </p>
 
     <?= DetailView::widget([

@@ -60,6 +60,22 @@ if (!function_exists('response')) {
     }
 }
 
+
+if (!function_exists('get')) {
+    function get($attribute)
+    {
+        return Yii::$app->request->get($attribute);
+    }
+}
+
+
+if (!function_exists('post')) {
+    function post($attribute)
+    {
+        return Yii::$app->request->post($attribute);
+    }
+}
+
 if (!function_exists('setFlash')) {
     function setFlash($category = 'warning', $message = '')
     {

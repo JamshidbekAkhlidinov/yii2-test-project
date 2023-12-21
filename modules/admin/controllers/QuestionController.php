@@ -33,7 +33,7 @@ class QuestionController extends Controller
     }
 
 
-    public function actionIndex($test_id)
+    public function actionIndex($test_id = null)
     {
         $searchModel = new QuestionSearch(['test_id' => $test_id]);
         $dataProvider = $searchModel->search(request()->queryParams);
@@ -71,7 +71,10 @@ class QuestionController extends Controller
     {
         $form = new QuestionForm($model);
         if ($form->load(request()->post()) && $form->save()) {
-            return $this->redirect(['view', 'id' => $form->question->id]);
+            return $this->redirect([
+                'question/index',
+                'test_id' => $form->question->test_id
+            ]);
         }
         return $this->render($view, [
             'model' => $form,
